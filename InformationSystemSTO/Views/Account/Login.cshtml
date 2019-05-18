@@ -1,0 +1,27 @@
+﻿@model InformationSystemSTO.Models.LoginModel
+
+@{
+    ViewBag.Title = "Вхід";
+}
+
+<h2>Війдіть в систему або <a href="/Account/Register">зареєструйтесь</a></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary()
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+        <p>
+            <label>Почта</label><br />
+            @Html.EditorFor(x => x.Email)
+        </p>
+        <p>
+            <label>Пароль</label><br />
+            @Html.EditorFor(x => x.Password)
+        </p>
+        <p><button type="submit" class="bg-primary">Войти</button></p>
+    </div>
+}
