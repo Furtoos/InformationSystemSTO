@@ -47,7 +47,9 @@ namespace InformationSystemSTO.Controllers
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    await UserManager.AddToRoleAsync(user.Id, "user");
+                    //await SignInManager.SingInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Index", "System");
                 }
                 else
                 {
@@ -88,7 +90,7 @@ namespace InformationSystemSTO.Controllers
                         IsPersistent = false
                     }, ident);
                     if (String.IsNullOrEmpty(returnUrl))
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "System");
                     return Redirect(returnUrl);
                 }
             }
@@ -98,7 +100,7 @@ namespace InformationSystemSTO.Controllers
         public ActionResult Logout()
         {
             AuthManager.SignOut();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","System");
         }
     }
 }

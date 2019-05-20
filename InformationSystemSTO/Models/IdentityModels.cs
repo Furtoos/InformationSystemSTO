@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -17,8 +18,9 @@ namespace InformationSystemSTO.Models
     }
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationContext() : base("InformationSystem") { }
-
+        public ApplicationContext() : base("SystemContext") { }
+        public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<Project> Projects { get; set; }
         public static ApplicationContext Create()
         {
             return new ApplicationContext();

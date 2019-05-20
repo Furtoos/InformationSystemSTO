@@ -1,0 +1,46 @@
+﻿@model IEnumerable<InformationSystemSTO.Models.Project>
+
+@{
+    ViewBag.Title = "Проекти";
+}
+@foreach (var item in Model)
+{
+    <div class="row mx-auto">
+        <div class="col-md-4 text-primary">
+            <h3>@item.Name</h3>
+        </div>
+        <div class="col-md-8 text-primary">
+            <h3>@item.Region</h3>
+        </div>
+    </div>
+    foreach (var equipment in item.Equipments)
+    {
+        <div class="row mx-auto">
+            <div class="col-md-4 text-primary text-center align-content-center">
+                @Html.Raw("<img class='img-thumbnail'src=\"data:image/jpeg;base64,"
+                     + Convert.ToBase64String(equipment.Image) + "\" />");
+            </div>
+            <div class="col-md-2 text-primary text-center align-content-center">
+                <h6>@equipment.Name</h6>
+            </div>
+            <div class="col-md-2 text-primary text-center align-content-center">
+                <h6>@equipment.Prise</h6>
+            </div>
+            <div class="col-md-2 text-primary text-center align-content-center">
+                @if (equipment.Status)
+                {
+                    <h6>Викоритовуеться</h6>
+                }
+                else
+                {
+                    <h6>Потребує ремонту</h6>
+                }
+            </div>
+            <div class="col-md-2 text-primary text-center align-content-center">
+                <h6>@equipment.UserName</h6>
+            </div>
+        </div>
+    }
+}
+
+
